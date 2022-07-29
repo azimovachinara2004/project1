@@ -3,18 +3,28 @@ import data from './helper/data';
 import './App.css';
 //import Loading from './components/Loading';
 import {SpinnerInfinity} from 'spinners-react'
-
+import { useEffect } from 'react';
+import Filter from './components/Filter';
 function App() {
+
   const[userData,setUserData]=useState(data)
   const[isLoading,setIsLoading]=useState(true)
+  const[search,setSearch]=useState("")
 
   setTimeout(()=>{
   setIsLoading(false)
-  },2000)
+  },3000)
+
+  useEffect(()=>{
+    setUserData(data)
+  },[search])
+
+
+  
    return (
     <div>
     <h1> Marvel Heroes</h1>
-   
+    <Filter getData={(value)=>setSearch(value)}/>
     {isLoading ? (
         <SpinnerInfinity
           className="spinner"
@@ -39,6 +49,7 @@ function App() {
          )
        })
      }
+
       </div>
       )}
       
